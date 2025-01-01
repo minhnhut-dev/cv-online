@@ -4,6 +4,7 @@ import './contact.css'
 import { topContext } from '../../App'
 import { SiGmail } from 'react-icons/si'
 import { RiMessengerLine } from 'react-icons/ri'
+import Swal from 'sweetalert2'
 
 function Contact() {
 
@@ -20,10 +21,17 @@ function Contact() {
 
   function handleSubmit(e){
     e.preventDefault()
-    emailjs.sendForm('service_c92rnzf','template_dn315h8', form.current,'fLCccvgLQghBlqt0H')
-    alert('Email sent!')
-    e.target.reset()
-  } 
+    emailjs.sendForm('service_adojqsj','template_5kebyx5', form.current,'GRNkmHJc2ql67_ksn').then((result) => {
+     if(result.text === 'OK'){
+      Swal.fire({
+        title: "Good job!",
+        text: "Thank you for responding to me!",
+        icon: "success"
+      });
+     }
+     e.target.reset();
+    })
+  }
 
   return (
     <section className='main_section' id='contact' ref={contactRef}>
